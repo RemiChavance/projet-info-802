@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs';
+import { SoapCalculService } from './services/soap-calcul.service';
 
 @Component({
   selector: 'app-root',
