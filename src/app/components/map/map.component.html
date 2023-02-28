@@ -1,0 +1,32 @@
+<form>
+    <datalist id="startCitySuggestions">
+        <option>Paris</option>
+    </datalist>
+
+    <input type="search" 
+        id="startSearch"
+        name="startSearch"
+        placeholder="Départ"
+        autocomplete="on"
+        list="startCitySuggestions"
+    >
+
+    <datalist id="destCitySuggestions">
+        <option>Chambéry</option>
+    </datalist>
+
+    <input type="search" 
+        id="destSearch"
+        name="destSearch"
+        placeholder="Arrivé"
+        autocomplete="on"
+        list="destCitySuggestions"
+    >
+
+    <button type="submit">Chercher</button>
+
+    
+</form>
+
+
+<div id="map"></div>

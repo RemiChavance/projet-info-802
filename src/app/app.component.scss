@@ -1,0 +1,12 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.one {
+    grid-column: 1;
+}
+
+.two {
+    grid-column: 2 / 4;
+}
