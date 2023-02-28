@@ -24,8 +24,6 @@ export class MapService {
 
     return this.http.get<any>(uri).pipe(
       map(value => {
-        console.log(value);
-        console.log(value[0].lat + value[0].lon);
         return  { lat: value[0].lat, lon: value[0].lon };
       })
     );

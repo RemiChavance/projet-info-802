@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import { Observable, tap } from 'rxjs';
+import('leaflet-routing-machine');
+import { Observable, tap, zip } from 'rxjs';
 import { MapService } from 'src/app/services/map.service';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -50,7 +51,7 @@ export class MapComponent implements OnInit {
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
-      minZoom: 3,
+      minZoom: 1,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
@@ -67,12 +68,35 @@ export class MapComponent implements OnInit {
 
 
   onSubmitForm() {
-    this.mapService.getGeoCoding(this.startCity).pipe(
+    
+    zip(
+      this.mapService.getGeoCoding(this.startCity),
+      this.mapService.getGeoCoding(this.destCity)
+    ).pipe(
       tap(value => {
-        this.map.setView(new L.LatLng(value.lat, value.lon), 7, { animation: true });
-        L.marker(new L.LatLng(value.lat, value.lon)).addTo(this.map);
+        const start = value[0];
+        const dest = value[1];
+
+        const waypoint1 = new L.LatLng(start.lat, start.lon);
+        const waypoint2 = new L.LatLng(dest.lat, dest.lon);
+
+        this.traceRoute([waypoint1, waypoint2]);
       })
     ).subscribe();
   }
 
+
+  private traceRoute(waypoints: L.LatLng[]) {
+    const routing = L.Routing.control({
+      waypoints: waypoints
+    }).addTo(this.map);
+
+    routing.on('routesfound', (e) => {
+      const distance = e.routes[0].summary.totalDistance;
+      console.log('routing distance: ' + distance + ' meters');
+    });
+  }
 }
+
+// to add a marker on the map :
+// L.marker(waypoint1).addTo(this.map);
