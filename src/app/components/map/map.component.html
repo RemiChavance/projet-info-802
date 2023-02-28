@@ -1,6 +1,6 @@
-<form>
-    <datalist id="startCitySuggestions">
-        <option>Paris</option>
+<form (ngSubmit)="onSubmitForm()">
+    <datalist *ngIf="startCities$ | async as startCities" id="startCitySuggestions">
+        <option *ngFor="let city of startCities">{{ city }}</option>
     </datalist>
 
     <input type="search" 
@@ -9,10 +9,13 @@
         placeholder="Départ"
         autocomplete="on"
         list="startCitySuggestions"
+        [(ngModel)]="startCity"
+        (input)="onChangeStartSearch()"
     >
 
-    <datalist id="destCitySuggestions">
-        <option>Chambéry</option>
+
+    <datalist *ngIf="destCities$ | async as destCities" id="startCitySuggestions">
+        <option *ngFor="let city of destCities">{{ city }}</option>
     </datalist>
 
     <input type="search" 
@@ -21,11 +24,11 @@
         placeholder="Arrivé"
         autocomplete="on"
         list="destCitySuggestions"
+        [(ngModel)]="destCity"
+        (change)="onChangeDestSearch()"
     >
 
-    <button type="submit">Chercher</button>
-
-    
+    <button type="submit">Chercher</button>    
 </form>
 
 
