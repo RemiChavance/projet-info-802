@@ -1,5 +1,5 @@
 <article>
-    <form #calculForm="ngForm" (ngSubmit)="onSubmitForm(calculForm)">
+    <!--<form #calculForm="ngForm" (ngSubmit)="onSubmitForm(calculForm)">-->
         
         <label for="distanceInput">Distance en km</label>
         <input id="distanceInput" name="distance"  value="{{distance$ | async}}" readonly>
@@ -9,13 +9,8 @@
     
         <label for="nbRechargeInput">Nombre de recharge</label>
         <input id="nbRechargeInput" name="nbRecharge"  value="{{nbRecharge$ | async}}" readonly>
-        
+    <!--
         <button type="submit">Calculer</button>
-    </form>
-
-    <div *ngIf="duration$ | async as duration">
-        <hr>
-        <p>Resultat : {{ duration }}</p>
-    </div>
+    </form>-->
 
 </article>

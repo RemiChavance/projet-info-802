@@ -28,18 +28,7 @@ export class CalculComponent implements OnInit {
   }
 
   onSubmitForm(form: NgForm) {
-    console.log(form.value);
-
-    const dist = form.value.distance;
-    const vitt = form.value.vitesse;
-    const auto = form.value.autonomie;
-    const rech = form.value.recharge;
-
-    /*
-    this.soapCalculService.calculDuration(dist, vitt, 1, 10).pipe(
-      map(value => this.resultat = value)
-    ).subscribe();
-    */
+    //console.log(form.value);
   }
 
 }
