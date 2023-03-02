@@ -1,23 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { map, Observable } from 'rxjs';
-import { SoapCalculService } from 'src/app/services/soap-calcul.service';
+import { Observable } from 'rxjs';
+import { InfoService } from 'src/app/services/info.service';
 
 @Component({
   selector: 'app-calcul',
   templateUrl: './calcul.component.html',
   styleUrls: ['./calcul.component.scss']
 })
-export class CalculComponent {
+export class CalculComponent implements OnInit {
 
-  distance!: number;
-  vitesse!: number;
   autonomie!: number;
   recharge!: number;
 
-  resultat!: number;
+  duration$!: Observable<number | null>;
+  distance$!: Observable<number | null>;
+  nbRecharge$!: Observable<number | null>;
 
-  constructor(private soapCalcul: SoapCalculService) { }
+
+  constructor(private infoService: InfoService) { }
+
+
+  ngOnInit(): void {
+    this.duration$ = this.infoService.duration$;
+    this.distance$ = this.infoService.distance$;
+    this.nbRecharge$ = this.infoService.nbRecharge$;
+  }
 
   onSubmitForm(form: NgForm) {
     console.log(form.value);
@@ -27,9 +35,11 @@ export class CalculComponent {
     const auto = form.value.autonomie;
     const rech = form.value.recharge;
 
-    this.soapCalcul.calculDuration(dist, vitt, auto, rech).pipe(
+    /*
+    this.soapCalculService.calculDuration(dist, vitt, 1, 10).pipe(
       map(value => this.resultat = value)
     ).subscribe();
+    */
   }
 
 }

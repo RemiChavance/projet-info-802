@@ -9,21 +9,20 @@ import math
 class CalculService(ServiceBase):
 
     @rpc(Decimal, Decimal, Decimal, Decimal, _returns=Decimal)
-    def calculer_temps_trajet(ctx, distance_km, vitesse_km_h, autonomie_km, temps_recharge_h):
+    def calculer_temps_trajet(ctx, distance_km, vitesse_km_h, nb_recharge, temps_recharge_h):
         ctx.transport.resp_headers['Access-Control-Allow-Origin'] = '*'
         
         # Temps de trajet sans recharge
         temps_trajet = distance_km / vitesse_km_h  
         
-        # Nombre de recharges nécessaires
-        nb_recharges = int(math.ceil(distance_km / autonomie_km)) - 1
-        
         # Temps total de recharge
-        temps_recharge_total = nb_recharges * temps_recharge_h
+        temps_recharge_total = nb_recharge * temps_recharge_h
 
         # Temps total de trajet avec recharges
         temps_trajet_total = temps_trajet + temps_recharge_total
         
+        print(temps_trajet_total)
+
         return temps_trajet_total
 
 

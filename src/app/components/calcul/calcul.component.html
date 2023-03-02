@@ -1,24 +1,21 @@
 <article>
     <form #calculForm="ngForm" (ngSubmit)="onSubmitForm(calculForm)">
-    
+        
         <label for="distanceInput">Distance en km</label>
-        <input id="distanceInput" name="distance" type="number" [(ngModel)]="distance">
-        
-        <label for="vitesseInput">Vitesse en km/h</label>
-        <input id="vitesseInput" name="vitesse" type="number" [(ngModel)]="vitesse">
-        
-        <label for="autonomieInput">Autonomie en km</label>
-        <input id="autonomieInput" name="autonomie" type="number" [(ngModel)]="autonomie">
-        
-        <label for="rechargeInput">Recharge en h</label>
-        <input id="rechargeInput" name="recharge" type="number" [(ngModel)]="recharge">
+        <input id="distanceInput" name="distance"  value="{{distance$ | async}}" readonly>
+
+        <label for="durationInput">Temps en heures</label>
+        <input id="durationInput" name="duration"  value="{{duration$ | async}} heures" readonly>
+    
+        <label for="nbRechargeInput">Nombre de recharge</label>
+        <input id="nbRechargeInput" name="nbRecharge"  value="{{nbRecharge$ | async}}" readonly>
         
         <button type="submit">Calculer</button>
     </form>
 
-    <div *ngIf="resultat">
+    <div *ngIf="duration$ | async as duration">
         <hr>
-        <p>Resultat : {{ resultat }}</p>
+        <p>Resultat : {{ duration }}</p>
     </div>
 
 </article>
