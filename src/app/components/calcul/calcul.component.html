@@ -5,7 +5,7 @@
         <input id="distanceInput" name="distance"  value="{{distance$ | async}}" readonly>
 
         <label for="durationInput">Temps en heures</label>
-        <input id="durationInput" name="duration"  value="{{duration$ | async}} heures" readonly>
+        <input id="durationInput" name="duration"  value="{{duration$ | async | hours }}" readonly>
     
         <label for="nbRechargeInput">Nombre de recharge</label>
         <input id="nbRechargeInput" name="nbRecharge"  value="{{nbRecharge$ | async}}" readonly>

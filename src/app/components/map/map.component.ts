@@ -109,10 +109,10 @@ export class MapComponent implements OnInit {
       const coords = e.routes[0].coordinates;
       const autonomyKm = 500;
 
-      // we calcul when we need electric power
+      // we calcul when we have enought autonomy
       let index = this.calculIndexArray(distanceKm, autonomyKm, coords.length);
       
-      // if we need it on the road
+      // if we need it, we search for charging points
       if (index != null) {
         const observables: Observable<any>[] = [];
 
@@ -141,6 +141,9 @@ export class MapComponent implements OnInit {
             this.secondTraceRoute(newWaypoints, routing);
           })
         ).subscribe();
+      
+      } else {
+        this.secondTraceRoute(waypoints, routing);
       }
     });
   }
