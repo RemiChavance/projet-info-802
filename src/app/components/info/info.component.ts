@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 import { InfoService } from 'src/app/services/info.service';
 
 @Component({
-  selector: 'app-calcul',
-  templateUrl: './calcul.component.html',
-  styleUrls: ['./calcul.component.scss']
+  selector: 'app-info',
+  templateUrl: './info.component.html',
+  styleUrls: ['./info.component.scss']
 })
-export class CalculComponent implements OnInit {
+export class InfoComponent implements OnInit {
 
   autonomie!: number;
   recharge!: number;

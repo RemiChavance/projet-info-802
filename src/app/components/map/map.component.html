@@ -1,4 +1,5 @@
 <form (ngSubmit)="onSubmitForm()">
+    
     <datalist *ngIf="startCities$ | async as startCities" id="startCitySuggestions">
         <option *ngFor="let city of startCities">{{ city }}</option>
     </datalist>

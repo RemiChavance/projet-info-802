@@ -4,23 +4,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CalculComponent } from './components/calcul/calcul.component';
+import { InfoComponent } from './components/info/info.component';
 import { FormsModule } from '@angular/forms';
 import { MapComponent } from './components/map/map.component';
 import { HoursPipe } from './pipes/hours.pipe';
+import { GraphQLModule } from './graphql.module';
+import { CarsComponent } from './components/cars/cars.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CalculComponent,
+    InfoComponent,
     MapComponent,
-    HoursPipe
+    HoursPipe,
+    CarsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]

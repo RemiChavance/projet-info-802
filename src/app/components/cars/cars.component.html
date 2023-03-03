@@ -1,0 +1,22 @@
+<article>
+    <form (ngSubmit)="onSubmitForm()">
+
+        <datalist *ngIf="carsSuggestions$ | async as cars" id="carsSuggestions">
+            <option *ngFor="let car of cars">{{ car.model }}</option>
+        </datalist>
+
+        <label for="carsInput">Choissisez votre voiture</label>
+
+        <input type="search"
+            id="carsInput"
+            name="carsInput"
+            placeholder="Model X"
+            autocomplete="on"
+            list="carsSuggestions"
+            [(ngModel)]="car"
+            (input)="onChangeCarSearch()"
+        >
+    
+        <button type="submit">Valider</button>
+    </form>
+</article>
