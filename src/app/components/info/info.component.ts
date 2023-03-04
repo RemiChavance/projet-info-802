@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { InfoService } from 'src/app/services/info.service';
 
@@ -10,9 +9,7 @@ import { InfoService } from 'src/app/services/info.service';
 })
 export class InfoComponent implements OnInit {
 
-  autonomie!: number;
-  recharge!: number;
-
+  autonomy$!: Observable<number | null>;
   duration$!: Observable<number | null>;
   distance$!: Observable<number | null>;
   nbRecharge$!: Observable<number | null>;
@@ -25,10 +22,6 @@ export class InfoComponent implements OnInit {
     this.duration$ = this.infoService.duration$;
     this.distance$ = this.infoService.distance$;
     this.nbRecharge$ = this.infoService.nbRecharge$;
+    this.autonomy$ = this.infoService.autonomy$;
   }
-
-  onSubmitForm(form: NgForm) {
-    //console.log(form.value);
-  }
-
 }

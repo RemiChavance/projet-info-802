@@ -38,6 +38,9 @@ export class MapComponent implements OnInit {
   private map!: any;
   private route!: any;
 
+
+  autonomyKm: number = 0;
+
   constructor(
     private mapService: MapService,
     private borneService: BorneService,
@@ -50,6 +53,10 @@ export class MapComponent implements OnInit {
 
     this.startCities$ = this.mapService.startCities$;
     this.destCities$ = this.mapService.destCities$;
+
+    this.infoService.autonomy$.pipe(
+      tap(value => this.autonomyKm = value)
+    ).subscribe();
   }
 
   private initMap(): void {
@@ -107,13 +114,13 @@ export class MapComponent implements OnInit {
     routing.on('routesfound', (e) => {
       const distanceKm = e.routes[0].summary.totalDistance / 1000;
       const coords = e.routes[0].coordinates;
-      const autonomyKm = 500;
 
       // we calcul when we have enought autonomy
-      let index = this.calculIndexArray(distanceKm, autonomyKm, coords.length);
+      let index = this.calculIndexArray(distanceKm, this.autonomyKm, coords.length);
       
       // if we need it, we search for charging points
       if (index != null) {
+        
         const observables: Observable<any>[] = [];
 
         // for each, we want to find the nearest charging point
@@ -158,14 +165,14 @@ export class MapComponent implements OnInit {
     this.map.removeControl(routeToRemove);
 
     this.route.on('routesfound', (e: any) => {
-      const distanceKm = e.routes[0].summary.totalDistance / 1000;
-
-      console.log('distanceKm : ' + distanceKm);
+      const d = e.routes[0].summary.totalDistance / 1000;
+      const distanceKm = parseFloat(d.toFixed(1));
 
       // calcul duration
       const tempsRecharge = 0.5;
       const nbRecharge = waypoints.length-2;
       const vitesseKm = 100;
+
       this.soapCalculService.calculDuration(distanceKm, vitesseKm, tempsRecharge, nbRecharge).pipe(
         tap(value => {
           this.infoService.setDuration(value);

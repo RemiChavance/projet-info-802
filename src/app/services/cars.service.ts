@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { InfoService } from './info.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,31 +10,36 @@ export class CarsService {
 
   private carsSearch: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   carsSearch$: Observable<any[]> = this.carsSearch.asObservable();
-
- 
-  constructor(private apollo: Apollo) { }
- 
   
+ 
+  constructor(
+    private apollo: Apollo,
+    private infoService: InfoService
+  ) { }
+ 
+
   findCarInfo(id: number) {
     this.apollo.watchQuery({
       query: gql`
         query vehicle {
           vehicle(id: "${id}") {
             id
-            naming {
-              make
-              model
-            }
-            battery {
-              usable_kwh
-              full_kwh
+            range {
+              chargetrip_range {
+                best
+                worst
+              }
             }
           }
         }
         `,
     }).valueChanges.pipe(
-      map((value: any) => value.data.vehicle.battery), //.usable_kwh
-      tap(value => console.log(value))
+      map((value: any) => {
+        const best = value.data.vehicle.range.chargetrip_range.best;
+        const worst = value.data.vehicle.range.chargetrip_range.worst;
+        return (best + worst) / 2;
+      }),
+      tap(value => this.infoService.setAutonomy(value))
     ).subscribe();
   }
 

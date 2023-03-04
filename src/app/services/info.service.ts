@@ -15,6 +15,9 @@ export class InfoService {
   private nbRecharge: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   nbRecharge$: Observable<number | null> = this.nbRecharge.asObservable();
 
+  private autonomy: BehaviorSubject<number> = new BehaviorSubject<number>(500);
+  autonomy$: Observable<number> = this.autonomy.asObservable();
+
   
   constructor() { }
 
@@ -31,4 +34,7 @@ export class InfoService {
     this.nbRecharge.next(nbRecharge);
   }
 
+  setAutonomy(autonomy: number) {
+    this.autonomy.next(autonomy);
+  }
 }

@@ -33,7 +33,6 @@ export class CarsComponent implements OnInit {
     const carObj = this.carsSuggestions.find(x => x.model == this.car);
     if (carObj == null) return;
 
-    console.log(this.carsSuggestions);
     this.carsService.findCarInfo(carObj.id);
   }
 
