@@ -8,7 +8,7 @@ import { InfoService } from './info.service';
 })
 export class NodeApiService {
 
-  private uri = 'http://localhost:3000';
+  private uri = 'https://node-api-lac-nine.vercel.app';
   
   constructor(
     private http: HttpClient,
