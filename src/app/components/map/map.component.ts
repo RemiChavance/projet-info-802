@@ -5,6 +5,7 @@ import { Observable, tap, zip, zipAll } from 'rxjs';
 import { BorneService } from 'src/app/services/borne.service';
 import { InfoService } from 'src/app/services/info.service';
 import { MapService } from 'src/app/services/map.service';
+import { NodeApiService } from 'src/app/services/node-api.service';
 import { SoapCalculService } from 'src/app/services/soap-calcul.service';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -39,13 +40,14 @@ export class MapComponent implements OnInit {
   private route!: any;
 
 
-  autonomyKm: number = 0;
+  autonomyKm: number = 500;
 
   constructor(
     private mapService: MapService,
     private borneService: BorneService,
     private soapCalculService: SoapCalculService,
-    private infoService: InfoService
+    private infoService: InfoService,
+    private nodeApiService: NodeApiService
   ) { }
 
   ngOnInit(): void {
@@ -172,6 +174,8 @@ export class MapComponent implements OnInit {
       const tempsRecharge = 0.5;
       const nbRecharge = waypoints.length-2;
       const vitesseKm = 100;
+
+      this.nodeApiService.getCost(distanceKm);
 
       this.soapCalculService.calculDuration(distanceKm, vitesseKm, tempsRecharge, nbRecharge).pipe(
         tap(value => {

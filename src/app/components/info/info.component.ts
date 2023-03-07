@@ -13,6 +13,7 @@ export class InfoComponent implements OnInit {
   duration$!: Observable<number | null>;
   distance$!: Observable<number | null>;
   nbRecharge$!: Observable<number | null>;
+  cost$!: Observable<number | null>;
 
 
   constructor(private infoService: InfoService) { }
@@ -23,5 +24,6 @@ export class InfoComponent implements OnInit {
     this.distance$ = this.infoService.distance$;
     this.nbRecharge$ = this.infoService.nbRecharge$;
     this.autonomy$ = this.infoService.autonomy$;
+    this.cost$ = this.infoService.cost$;
   }
 }
