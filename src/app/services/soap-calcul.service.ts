@@ -11,7 +11,7 @@ export class SoapCalculService {
   duration$: Observable<number | null> = this.duration.asObservable();
 
 
-  private uri = 'http://localhost:8000';
+  private uri = 'https://soap-api.vercel.app';
   private options = { responseType: 'text' as 'json' };
 
   constructor(private http: HttpClient) { }
