@@ -171,13 +171,13 @@ export class MapComponent implements OnInit {
       const distanceKm = parseFloat(d.toFixed(1));
 
       // calcul duration
-      const tempsRecharge = 0.5;
+      const tempsRechargeH = 1;
       const nbRecharge = waypoints.length-2;
       const vitesseKm = 100;
 
       this.nodeApiService.getCost(distanceKm);
 
-      this.soapCalculService.calculDuration(distanceKm, vitesseKm, tempsRecharge, nbRecharge).pipe(
+      this.soapCalculService.calculDuration(distanceKm, vitesseKm, nbRecharge, tempsRechargeH).pipe(
         tap(value => {
           this.infoService.setDuration(value);
           this.infoService.setDistance(distanceKm);

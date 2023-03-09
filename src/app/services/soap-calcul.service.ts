@@ -12,6 +12,7 @@ export class SoapCalculService {
 
 
   private uri = 'https://soap-api.vercel.app';
+  //private uri = 'http://localhost:8000';
   private options = { responseType: 'text' as 'json' };
 
   constructor(private http: HttpClient) { }
