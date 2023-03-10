@@ -18,7 +18,7 @@ export class NodeApiService {
 
 
   getCost(distanceKm: number) {
-    this.http.post<any>(this.uri, { km: distanceKm }).pipe(
+    this.http.get<any>(this.uri + '/' + distanceKm).pipe(
       map(value => value.price),
       tap(value => this.infoService.setCost(value))
     ).subscribe();
