@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, filter, map, Observable, repeat, retry, retryWhen, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BorneService {
 
-  private API_URI = 'https://odre.opendatasoft.com/api/records/1.0/search/?dataset=bornes-irve&q=&';
+  private API_URI = environment.borneURI;
 
 
   constructor(private http: HttpClient) { }

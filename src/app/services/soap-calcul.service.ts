@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { environment } from 'src/environments/environment.dev';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class SoapCalculService {
   duration$: Observable<number | null> = this.duration.asObservable();
 
 
-  private uri = 'https://soap-api.vercel.app';
-  //private uri = 'http://localhost:8000';
+  private uri = environment.soapURI;
+  
   private options = { responseType: 'text' as 'json' };
 
   constructor(private http: HttpClient) { }

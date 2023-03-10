@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs';
+import { environment } from 'src/environments/environment.dev';
 import { InfoService } from './info.service';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { InfoService } from './info.service';
 })
 export class NodeApiService {
 
-  private uri = 'https://node-api-lac-nine.vercel.app';
+  private uri = environment.restURI;
   
   constructor(
     private http: HttpClient,

@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { environment } from 'src/environments/environment.dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
 
-  private API_URI = 'https://nominatim.openstreetmap.org';
+  private API_URI = environment.nominatimAPI;
 
 
   private startCities: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);

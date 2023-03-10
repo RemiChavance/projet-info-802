@@ -3,16 +3,17 @@ import {ApolloModule, APOLLO_OPTIONS} from 'apollo-angular';
 import {ApolloClientOptions, InMemoryCache} from '@apollo/client/core';
 import {HttpLink} from 'apollo-angular/http';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment.dev';
 
 
-const uri = 'https://api.chargetrip.io/graphql'; // our GraphQL API
+const uri = environment.chargeTripURI; // our GraphQL API
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   return {
     link: httpLink.create({
       uri,
       headers: new HttpHeaders({
-        'x-client-id': '64021b9185c5c3f0221ae344',
-        'x-app-id': '64021b9185c5c3f0221ae346'
+        'x-client-id': environment.chargeTripClientKey,
+        'x-app-id': environment.chargeTripAppKey
       }),
       method: 'POST'
     }),
