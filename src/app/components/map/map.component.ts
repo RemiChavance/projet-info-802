@@ -77,11 +77,11 @@ export class MapComponent implements OnInit {
   }
 
   onChangeStartSearch() {
-    //this.mapService.getStartCitiesSuggestions(this.startCity);
+    this.mapService.getStartCitiesSuggestions(this.startCity);
   }
 
   onChangeDestSearch() {
-    //this.mapService.getDestCitiesSuggestions(this.destCity);
+    this.mapService.getDestCitiesSuggestions(this.destCity);
   }
 
 
